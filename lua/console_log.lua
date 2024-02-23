@@ -57,8 +57,13 @@ local function logme(node)
 	vim.api.nvim_buf_set_lines(0, stop, stop + 1, false, { s, "", curr_line })
 end
 
-local curr_node = ts.get_node()
-logme(curr_node)
+local function console()
+	local curr_node = ts.get_node()
+	logme(curr_node)
+end
+
+vim.api.nvim_create_user_command("console", console, {})
+vim.keymap.set("n", "hc", console)
 
 -- lua vim.keymap.set('n', '<leader>c', ':luafile ./console.log.nvim/lua/console_log.lua<cr>', { silent = true, noremap = true })
 --  .
